@@ -33,6 +33,11 @@ if (text.trim().length === 0) {
   throw new Error('entry.txt is only white space');
 }
 
+// The brief asks for a single line: no line break may hide inside the text.
+if (/[\r\n]/.test(text)) {
+  throw new Error('entry.txt must be a single line (no line breaks)');
+}
+
 mkdirSync(outDir, { recursive: true });
 copyFileSync(source, target);
 
